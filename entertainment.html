@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var body = document.querySelector("body");
+        var navBar = document.createElement("div");
+        var divBar = document.createElement("div");
+        var divBar2 = document.createElement("div");
+        var divBar3 = document.createElement("div");
+        var divBar4 = document.createElement("div");
+
+        var a = document.createElement("a");
+        var a2 = document.createElement("a");
+        var a3 = document.createElement("a");
+        var a4 = document.createElement("a");
+        navBar.style.width = "100%";
+        navBar.style.display = "flex";
+
+        a.textContent = "Sports"
+        a.href = "sports.html"
+        a2.textContent = "Entertainment"
+        a2.href = "entertainment.html"
+        a3.textContent = "Technology"
+        a4.textContent = "Home"
+        a3.href = "technology.html"
+        a4.href = "newsApi1.html"
+
+        divBar.style.border = 1 + "px solid grey";
+        divBar2.style.border = 1 + "px solid grey";
+        divBar3.style.border = 1 + "px solid grey";
+        divBar4.style.border = 1 + "px solid grey";
+        a.style.width = 80 + "px";
+        a.style.height = 30 + "px";
+        a.style.textDecoration = "none";
+        divBar.append(a);
+        divBar2.append(a2);
+        divBar3.append(a3);
+        divBar4.append(a4);
+
+        navBar.style.padding = "auto"
+        navBar.style.paddingTop = "20px"
+        navBar.style.paddingLeft = "6%"
+        navBar.style.border = "2px solid black"
+        navBar.style.fontSize = "20px"
+        navBar.style.fontWeight = "600"
+        navBar.style.padding = "auto"
+        navBar.style.textAlign = "center";
+        a2.style.textDecoration = "none";
+        a3.style.textDecoration = "none";
+        a4.style.textDecoration = "none";
+
+        divBar.style.width = "14%"
+        divBar.style.borderRadius = "10px"
+        divBar2.style.borderRadius = "10px"
+        divBar3.style.borderRadius = "10px"
+        divBar4.style.borderRadius = "10px"
+        divBar.style.backgroundColor = "black"
+        divBar2.style.backgroundColor = "black"
+        divBar3.style.backgroundColor = "black"
+        divBar4.style.backgroundColor = "black"
+        a.style.color = "white"
+        a2.style.color = "white"
+        a3.style.color = "white"
+        a4.style.color = "white"
+        divBar.style.paddingTop = "10px"
+        divBar2.style.paddingTop = "10px"
+        divBar3.style.paddingTop = "10px"
+        divBar4.style.paddingTop = "10px"
+        divBar2.style.width = "14%"
+        divBar3.style.width = "14%"
+        divBar4.style.width = "14%"
+        divBar2.style.marginLeft = "10px"
+        divBar3.style.marginRigt = "20px"
+        divBar2.style.marginRight = "10px"
+        divBar.style.height = "40px"
+        divBar2.style.height = "40px"
+        divBar3.style.height = "40px"
+        divBar4.style.height = "40px"
+
+
+
+// Implementing search Bar in nav bar 
+        var searchBar = document.createElement('input');
+        searchBar.placeholder = " 🔍 Type here";
+        searchBar.type = "text";
+        searchBar.style.height = "101%"
+        // searchBar.style.margin = "2%"
+        searchBar.style.width = "101%"
+        searchBar.style.fontSize = "22px"
+        divBar5 = document.createElement("div");
+        // divBar5.style.border = 1 + "px solid grey";
+        // divBar5.style.backgroundColor = "black"
+        divBar5.style.height = "40px"
+        divBar5.style.marginRight = "20px"
+        // divBar5.style.paddingTop = "10px"
+        divBar5.style.width = "14%"
+        searchBar.style.borderRadius = "10px"
+        searchBar.style.border = "3px solid blue";
+        searchBar.id = "searchText";
+        divBar5.append(searchBar);
+        navBar.append(divBar5);
+
+
+        var searchBtn = document.createElement('button');
+        searchBtn.style.height = "101%"
+        searchBtn.textContent = "SEARCH"
+        // searchBar.style.margin = "2%"
+        searchBtn.style.width = "101%"
+        searchBtn.style.fontSize = "22px"
+        divBar5 = document.createElement("div");
+        // divBar5.style.border = 1 + "px solid grey";
+        // divBar5.style.backgroundColor = "black"
+        divBar5.style.height = "50px"
+        divBar5.style.marginRight = "20px"
+        // divBar5.style.paddingTop = "10px"
+        divBar5.style.width = "8%"
+        searchBtn.style.borderRadius = "10px"
+        searchBtn.style.border = "3px solid blue";
+        searchBtn.id = "searchText";
+        divBar5.append(searchBtn);
+        navBar.append(divBar5);
+
+
+        searchBtn.addEventListener("click", function(){
+            var searchText = document.getElementById("searchText").value;
+            if(!searchText){
+                alert("Please Enter text to search");
+            }
+            else{
+               newsApi(searchText);
+            }
+        })
+
+
+
+
+        navBar.style.height = "70px"
+        navBar.style.paddingDown = "20px"
+        navBar.append(divBar, divBar2, divBar3, divBar4);
+        body.append(navBar);
+
+
+        async function newsApi(search){
+            var link = "http://newsapi.org/v2/everything?q=" + search +"&from=2021-09-29&sortBy=popularity&apiKey=70d349c6fbc749edb423899493e06e6d";
+            // console.log(link);
+            let res = await fetch(link);
+            let news = await res.json();
+            news = news.articles;
+            createNewsHeadLines(news);
+        }
+        newsApi("entertainment")
+
+
+       var outerDiv = document.createElement("div");
+       const h3 = document.createElement("h1")
+       h3.textContent = "Todays entertainment News";
+       h3.style.textAlign = "center";
+       h3.style.backgroundColor = "black";
+       h3.style.color = "white";
+       outerDiv.append(h3);
+
+       function createNewsHeadLines(news){
+        var lineNumber=1;
+           outerDiv.innerHTML= "";
+               for(var data of news){
+                   var headLines = document.createElement("h4");
+                   headLines.textContent = (lineNumber++) +" . "+ (data.title);
+                   headLines.style.textAlign = "left"
+                   headLines.style.marginLeft = 15+"%";
+                   headLines.style.fontSize = 25+"px";
+                   outerDiv.append(headLines);
+
+               }
+               let body = document.querySelector("body");
+               body.backgroundColor = "cornsilk"
+               body.append(outerDiv);
+           }
+    </script>
+
+</body>
+
+</html>
